@@ -10,11 +10,13 @@ public class HeapMemoryOut {
             List<MemoryData> memoryHold = new ArrayList<>();
             for (int i = 0;; i++) {
                 MemoryData memory = new MemoryData(
-                        "I am very big string for memory out.I am very big string for memory out.I am very big string for memory out.I am very big string for memory out.I am very big string for memory out.I am very big string for memory out.I am very big string for memory out."+i);
+                        "I am very big string for memory out."+i);
                 memoryHold.add(memory);
-                System.out.println("Finish loop:"+memoryHold.size());
-                MemoryTools.printMemory();
                 Thread.sleep(10);
+                if (i%100 == 0) {
+                    System.out.println("Finish loop:" + memoryHold.size());
+                    MemoryTools.printMemory();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
