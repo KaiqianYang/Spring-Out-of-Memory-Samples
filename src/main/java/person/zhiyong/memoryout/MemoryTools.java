@@ -1,6 +1,13 @@
 package person.zhiyong.memoryout;
 
 
+import com.sun.management.OperatingSystemMXBean;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryManagerMXBean;
+import java.lang.management.MemoryPoolMXBean;
+import java.util.Arrays;
+import java.util.List;
+
 public class MemoryTools{
 
     public static void printMemory(){
@@ -12,6 +19,21 @@ public class MemoryTools{
         System.out.println("Total Memory:"+totalMemory);
         System.out.println("Free Memory:"+freeMemory);
         System.out.println("Used Memory:"+usedMemory);
+
+    }
+
+
+    public static int printDirectMemory(boolean printInfo){
+        List<MemoryPoolMXBean> memoryPoolMXBeans = ManagementFactory.getMemoryPoolMXBeans();
+        for(MemoryPoolMXBean bean:memoryPoolMXBeans){
+            System.out.println(bean.getName()+"： "+bean.getUsage());
+        }
+        List<MemoryManagerMXBean> memoryManagerMXBeans = ManagementFactory.getMemoryManagerMXBeans();
+        for(MemoryManagerMXBean bean:memoryManagerMXBeans){
+            System.out.println(bean.getName()+"： "+ Arrays.asList(bean.getMemoryPoolNames()));
+        }
+        System.out.println();
+        return 0;
 
     }
 }
